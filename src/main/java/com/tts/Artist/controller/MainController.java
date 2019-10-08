@@ -27,11 +27,11 @@ public class MainController {
 		artistServiceImpl.saveArtist(artist);
 		return artistServiceImpl.saveAll(artist);
 	}
-	@DeleteMapping
-	
-	
-	
-	@PutMapping
+//	@DeleteMapping
+//	
+//	
+//	
+//	@PutMapping
 }
 
 
