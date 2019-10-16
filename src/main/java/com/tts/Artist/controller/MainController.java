@@ -3,9 +3,13 @@ package com.tts.Artist.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tts.Artist.model.Artist;
@@ -16,22 +20,35 @@ public class MainController {
 	@Autowired
 	ArtistServiceImpl artistServiceImpl;
 	
-	@GetMapping("/")
-	public Artist getArtist(Long id) {
+	@CrossOrigin 
+	@GetMapping("/artist/{id}")
+	public Artist getArtist(@PathVariable Long id) {
 		return artistServiceImpl.getSingleArtistById(id);
 	}
 	
-	@PostMapping("/")
-	@ResponseBody
-	public ArrayList<Artist> displayArtist(Artist artist) {
-		artistServiceImpl.saveArtist(artist);
-		return artistServiceImpl.saveAll(artist);
+	@CrossOrigin 
+	@GetMapping("/artists")
+	public ArrayList<Artist> getAllArtists(){
+		return artistServiceImpl.getAll();
 	}
-//	@DeleteMapping
-//	
-//	
-//	
-//	@PutMapping
+	
+	@CrossOrigin 
+	@PostMapping("/artist")
+	public void displayArtist(Artist artist) {
+		 artistServiceImpl.saveArtist(artist);
+	}
+	
+	@CrossOrigin 
+	@DeleteMapping("/artist/{id}")
+	public void deleteArtistById(@PathVariable Long id) {
+		artistServiceImpl.deleteById(id);
+	}
+	
+	@CrossOrigin 
+	@PutMapping("/artist/{id}")
+	public void updateArtistById(@PathVariable Long id, @RequestBody Artist artist) {
+		artistServiceImpl.updateArtist(id, artist);
+	}
 }
 
 

@@ -19,12 +19,33 @@ public class ArtistServiceImpl implements ArtistServiceInt {
 	}
 	
 	@Override
-	public void saveArtist(Artist artist) {
-		artistRepository.save(artist);
+	public ArrayList<Artist> getAll() {
+		return artistRepository.findAll();
 	}
 	
 	@Override
-	public ArrayList<Artist> saveAll(Artist artist) {
-		return artistRepository.findAll();
+	public void saveArtist(Artist artist) {
+		artistRepository.save(artist);
 	}
+	@Override
+	public void deleteById(Long id) {
+		artistRepository.deleteById(id);
+		
+	}
+	@Override
+	public void updateArtist(Long id, Artist artistChanges) {
+		Artist currentArtist = artistRepository.findArtistById(id);
+		String artistName = artistChanges.getArtistName();
+		String albumName = artistChanges.getAlbumName();
+		Integer albumYear = artistChanges.getAlbumYear();
+		currentArtist.setArtistName(artistName);
+		currentArtist.setAlbumName(albumName);
+		currentArtist.setAlbumYear(albumYear);
+		
+		artistRepository.save(currentArtist);
+	}
+	
+
+	
+	
 }
