@@ -20,31 +20,31 @@ public class MainController {
 	@Autowired
 	ArtistServiceImpl artistServiceImpl;
 	
-	@CrossOrigin 
+	@CrossOrigin(origins = "http://localhost:3000") 
 	@GetMapping("/artist/{id}")
 	public Artist getArtist(@PathVariable Long id) {
 		return artistServiceImpl.getSingleArtistById(id);
 	}
 	
-	@CrossOrigin 
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/artists")
 	public ArrayList<Artist> getAllArtists(){
 		return artistServiceImpl.getAll();
 	}
 	
-	@CrossOrigin 
+	@CrossOrigin(origins = "http://localhost:3000") 
 	@PostMapping("/artist")
-	public void displayArtist(Artist artist) {
+	public void displayArtist(@RequestBody Artist artist) {
 		 artistServiceImpl.saveArtist(artist);
 	}
 	
-	@CrossOrigin 
+	@CrossOrigin(origins = "http://localhost:3000") 
 	@DeleteMapping("/artist/{id}")
 	public void deleteArtistById(@PathVariable Long id) {
 		artistServiceImpl.deleteById(id);
 	}
 	
-	@CrossOrigin 
+	@CrossOrigin(origins = "http://localhost:3000") 
 	@PutMapping("/artist/{id}")
 	public void updateArtistById(@PathVariable Long id, @RequestBody Artist artist) {
 		artistServiceImpl.updateArtist(id, artist);
